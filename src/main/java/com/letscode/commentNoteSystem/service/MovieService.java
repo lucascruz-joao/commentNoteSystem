@@ -1,5 +1,6 @@
 package com.letscode.commentNoteSystem.service;
 
+import com.letscode.commentNoteSystem.model.Client;
 import com.letscode.commentNoteSystem.model.Movie;
 import com.letscode.commentNoteSystem.model.Rate;
 import com.letscode.commentNoteSystem.model.Review;
@@ -21,8 +22,8 @@ import java.util.stream.Collectors;
 public class MovieService {
     private final MovieRepository movieRepository;
     private final ModelMapper modelMapper;
-
     private final PointService pointService;
+    private final ClientService clientService;
 
     public List<MovieDTO> getAll() {
         List<Movie> all = this.movieRepository.findAll();
@@ -53,5 +54,16 @@ public class MovieService {
     public List<ReviewDTO> getAllReviewsByMovieId(Long movieId) {
         List<Review> reviews = this.getMovieById(movieId).getReviews();
         return Arrays.stream(modelMapper.map(reviews, ReviewDTO[].class)).collect(Collectors.toList());
+    }
+
+    public void addReviewByMovieId(Long movieId, Long userId, ReviewDTO reviewDTO) {
+        Movie movie = this.getMovieById(movieId);
+        Client client = clientService.getById(userId);
+        Review review = Review.builder()
+                .client(client)
+                .comment(reviewDTO.getComment())
+                .build();
+        movie.getReviews().add(review);
+        this.movieRepository.save(movie);
     }
 }

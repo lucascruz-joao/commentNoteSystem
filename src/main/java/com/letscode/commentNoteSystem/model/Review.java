@@ -2,6 +2,7 @@ package com.letscode.commentNoteSystem.model;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor @NoArgsConstructor
 public class Review {
     @Id
@@ -23,7 +25,7 @@ public class Review {
     @ManyToOne
     private Client client;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Review> reviews;
 
     @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")

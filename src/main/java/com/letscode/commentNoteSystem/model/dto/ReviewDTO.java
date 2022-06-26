@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class ReviewDTO {
+    private Long id;
     private String comment;
     @JsonProperty("name")
     private String clientName;
