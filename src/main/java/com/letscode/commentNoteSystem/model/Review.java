@@ -25,7 +25,7 @@ public class Review {
     @ManyToOne
     private Client client;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.REMOVE})
     private List<Review> reviews;
 
     @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")

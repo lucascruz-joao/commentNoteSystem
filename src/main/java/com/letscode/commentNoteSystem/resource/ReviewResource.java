@@ -33,4 +33,18 @@ public class ReviewResource {
         reviewService.addReplyOnReview(reviewId, userId, reviewDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @DeleteMapping("{movieId}/{reviewId}")
+    public ResponseEntity<Void> deleteReview(@PathVariable("movieId") Long movieId,
+                                             @PathVariable("reviewId") Long reviewId) {
+        reviewService.deleteReviewId(movieId, reviewId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("{reviewId}/{replyId}/reply")
+    public ResponseEntity<Void> deleteReply(@PathVariable("reviewId") Long reviewId,
+                                             @PathVariable("replyId") Long replyId) {
+        reviewService.deleteReplyById(reviewId, replyId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
