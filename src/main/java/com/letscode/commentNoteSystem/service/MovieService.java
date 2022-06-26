@@ -2,7 +2,9 @@ package com.letscode.commentNoteSystem.service;
 
 import com.letscode.commentNoteSystem.model.Movie;
 import com.letscode.commentNoteSystem.model.Rate;
+import com.letscode.commentNoteSystem.model.Review;
 import com.letscode.commentNoteSystem.model.dto.MovieDTO;
+import com.letscode.commentNoteSystem.model.dto.ReviewDTO;
 import com.letscode.commentNoteSystem.model.enums.OriginPointEnum;
 import com.letscode.commentNoteSystem.repository.MovieRepository;
 import lombok.AllArgsConstructor;
@@ -46,5 +48,10 @@ public class MovieService {
         //TODO: Melhorar essa busca usando o repository
         Optional<Rate> rate = movie.getRates().stream().filter(rateItem -> rateItem.getClient().getId().equals(clientId)).findFirst();
         return rate.orElse(null);
+    }
+
+    public List<ReviewDTO> getAllReviewsByMovieId(Long movieId) {
+        List<Review> reviews = this.getMovieById(movieId).getReviews();
+        return Arrays.stream(modelMapper.map(reviews, ReviewDTO[].class)).collect(Collectors.toList());
     }
 }

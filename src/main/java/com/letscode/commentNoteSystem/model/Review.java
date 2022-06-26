@@ -23,7 +23,6 @@ public class Review {
     @ManyToOne
     private Client client;
 
-    //TODO verificar se isso tá correto
     @ManyToMany
     private List<Review> reviews;
 

@@ -1,11 +1,13 @@
 package com.letscode.commentNoteSystem.resource;
 
 import com.letscode.commentNoteSystem.model.dto.MovieDTO;
+import com.letscode.commentNoteSystem.model.dto.ReviewDTO;
 import com.letscode.commentNoteSystem.service.MovieService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,5 +26,11 @@ public class MovieResource {
         if(all.size() != 0)
             return new ResponseEntity<>(all, HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("reviews/{movieId}")
+    public ResponseEntity<?> getAllReviewsByMovieId(@PathVariable("movieId") Long movieId) {
+        List<ReviewDTO> allReviews = movieService.getAllReviewsByMovieId(movieId);
+        return new ResponseEntity<>(allReviews, HttpStatus.OK);
     }
 }
