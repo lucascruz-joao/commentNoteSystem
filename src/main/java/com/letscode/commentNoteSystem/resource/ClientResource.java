@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(path="/client")
+@RequestMapping(path="/clients")
 @AllArgsConstructor
 public class ClientResource {
     private final ClientService clientService;

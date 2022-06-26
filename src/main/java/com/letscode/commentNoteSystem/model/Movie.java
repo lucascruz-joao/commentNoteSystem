@@ -26,4 +26,23 @@ public class Movie {
 
     @ManyToMany
     private List<Review> reviews;
+
+    @Transient
+    private Double rate;
+    @Transient
+    private Integer totalReviews;
+
+    public Double getRate() {
+        if(this.rates.size() > 0) {
+            double total = this.rates.stream().mapToDouble(Rate::getValue).sum();
+            this.rate = total/this.rates.size();
+        } else
+            this.rate = 0.0;
+        return this.rate;
+    }
+
+    public Integer getTotalReviews() {
+        this.totalReviews = this.reviews.size();
+        return this.totalReviews;
+    }
 }
