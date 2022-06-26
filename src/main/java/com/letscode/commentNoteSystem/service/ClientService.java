@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class ClientService {
@@ -24,5 +26,12 @@ public class ClientService {
         Client client = this.modelMapper.map(clientDTO, Client.class);
         client.setPassword(bCryptPasswordEncoder.encode(client.getPassword()));
         this.clientRepository.save(client);
+    }
+
+    public Client getById(Long id) {
+        Optional<Client> clientDb = clientRepository.findById(id);
+        if(clientDb.isPresent())
+            return clientDb.get();
+        throw new RuntimeException("Cliente não existe");
     }
 }

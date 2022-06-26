@@ -21,10 +21,10 @@ public class Movie {
 
     private String year;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Rate> rates;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Review> reviews;
 
     @Transient

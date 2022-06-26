@@ -16,7 +16,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @ControllerAdvice
@@ -39,9 +38,20 @@ public class handler extends ResponseEntityExceptionHandler {
         String userMessage = messageSource.getMessage("email.duplicate", null, LocaleContextHolder.getLocale());
         String developerMessage = ex.toString();
 
-        List<Error> errors = Arrays.asList(new Error(userMessage, developerMessage));
+        List<Error> errors = List.of(new Error(userMessage, developerMessage));
 
         return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.CONFLICT, request);
+    }
+
+    @ExceptionHandler({ RuntimeException.class })
+    public ResponseEntity<Object> handleRuntimeException(RuntimeException ex, WebRequest request) {
+
+        String userMessage = ex.getMessage();
+        String developerMessage = ex.toString();
+
+        List<Error> errors = List.of(new Error(userMessage, developerMessage));
+
+        return handleExceptionInternal(ex, errors, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     private List<Error> makeErrorsList(BindingResult bindingResult) {
