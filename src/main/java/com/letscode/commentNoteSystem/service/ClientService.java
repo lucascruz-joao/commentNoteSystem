@@ -1,6 +1,7 @@
 package com.letscode.commentNoteSystem.service;
 
 import com.letscode.commentNoteSystem.model.Client;
+import com.letscode.commentNoteSystem.model.Point;
 import com.letscode.commentNoteSystem.model.dto.ClientDTO;
 import com.letscode.commentNoteSystem.repository.ClientRepository;
 import lombok.AllArgsConstructor;
@@ -33,5 +34,10 @@ public class ClientService {
         if(clientDb.isPresent())
             return clientDb.get();
         throw new RuntimeException("Cliente não existe");
+    }
+
+    public void addPointClient(Client client, Point point) {
+        client.getPoints().add(point);
+        clientRepository.save(client);
     }
 }

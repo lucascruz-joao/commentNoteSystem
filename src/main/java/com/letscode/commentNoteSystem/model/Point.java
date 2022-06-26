@@ -2,6 +2,7 @@ package com.letscode.commentNoteSystem.model;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,6 +15,7 @@ import java.util.Date;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor @NoArgsConstructor
 public class Point {
     @Id
@@ -27,5 +29,5 @@ public class Point {
     private String origin;
 
     @CreationTimestamp
-    private Date createdAt;
+    private Date createAt;
 }

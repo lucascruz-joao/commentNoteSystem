@@ -26,11 +26,11 @@ public class Client {
     private String password;
     @ManyToOne
     private Profile profile;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Point> points;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Movie> likedMovies;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Movie> unlikedMovies;
 
 }

@@ -3,6 +3,7 @@ package com.letscode.commentNoteSystem.service;
 import com.letscode.commentNoteSystem.model.Movie;
 import com.letscode.commentNoteSystem.model.Rate;
 import com.letscode.commentNoteSystem.model.dto.MovieDTO;
+import com.letscode.commentNoteSystem.model.enums.OriginPointEnum;
 import com.letscode.commentNoteSystem.repository.MovieRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 public class MovieService {
     private final MovieRepository movieRepository;
     private final ModelMapper modelMapper;
+
+    private final PointService pointService;
 
     public List<MovieDTO> getAll() {
         List<Movie> all = this.movieRepository.findAll();
@@ -35,6 +38,7 @@ public class MovieService {
         Movie movie = this.getMovieById(movieId);
         movie.getRates().add(rate);
         this.movieRepository.save(movie);
+        pointService.addPointToUser(rate.getClient(), 1L, OriginPointEnum.RATE);
     }
 
     public Rate checkRateOnMovieByClient(Long movieId, Long clientId) {
