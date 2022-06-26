@@ -4,6 +4,7 @@ package com.letscode.commentNoteSystem.service;
 import com.letscode.commentNoteSystem.model.Client;
 import com.letscode.commentNoteSystem.model.Review;
 import com.letscode.commentNoteSystem.model.dto.ReviewDTO;
+import com.letscode.commentNoteSystem.model.enums.OriginPointEnum;
 import com.letscode.commentNoteSystem.repository.ReviewRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,8 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final ClientService clientService;
+
+    private final PointService pointService;
 
     public Review getById(Long id) {
         Optional<Review> review = reviewRepository.findById(id);
@@ -33,5 +36,6 @@ public class ReviewService {
                 .build();
         review.getReviews().add(reply);
         reviewRepository.save(review);
+        pointService.addPointToUser(client, 1L, OriginPointEnum.REPLY_REVIEW);
     }
 }

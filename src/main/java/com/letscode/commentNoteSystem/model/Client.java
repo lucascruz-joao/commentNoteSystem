@@ -31,6 +31,6 @@ public class Client {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Movie> likedMovies;
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Movie> unlikedMovies;
+    private List<Movie> dislikeMovies;
 
 }
