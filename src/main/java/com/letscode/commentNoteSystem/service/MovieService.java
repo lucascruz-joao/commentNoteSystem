@@ -62,8 +62,12 @@ public class MovieService {
         Review review = Review.builder()
                 .client(client)
                 .comment(reviewDTO.getComment())
+                .repeated(false)
+                .delete(false)
                 .build();
+
         movie.getReviews().add(review);
         this.movieRepository.save(movie);
+
     }
 }

@@ -28,9 +28,7 @@ public class Review {
     @ManyToMany(cascade = {CascadeType.ALL, CascadeType.REMOVE})
     private List<Review> reviews;
 
-    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
-    private Boolean repeated;
+    private Boolean repeated = false;
 
-    @Column(columnDefinition = "BOOLEAN DEFAULT FALSE")
-    private Boolean delete;
+    private Boolean delete = false;
 }

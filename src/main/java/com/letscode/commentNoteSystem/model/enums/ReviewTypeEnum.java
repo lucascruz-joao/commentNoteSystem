@@ -1,5 +1,5 @@
 package com.letscode.commentNoteSystem.model.enums;
 
-public enum MovieTypeEnum {
+public enum ReviewTypeEnum {
     LIKE, DISLIKE
 }

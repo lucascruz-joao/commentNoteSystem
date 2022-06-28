@@ -29,8 +29,7 @@ public class Client {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Point> points;
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Movie> likedMovies;
+    private List<Review> likeReview;
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Movie> dislikeMovies;
-
+    private List<Review> dislikeReviews;
 }

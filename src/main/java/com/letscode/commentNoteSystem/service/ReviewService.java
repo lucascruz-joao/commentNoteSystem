@@ -34,6 +34,8 @@ public class ReviewService {
         Review reply = Review.builder()
                 .comment(reviewDTO.getComment())
                 .client(client)
+                .delete(false)
+                .repeated(false)
                 .build();
         review.getReviews().add(reply);
         reviewRepository.save(review);

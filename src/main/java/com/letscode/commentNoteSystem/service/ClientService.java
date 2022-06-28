@@ -1,10 +1,10 @@
 package com.letscode.commentNoteSystem.service;
 
 import com.letscode.commentNoteSystem.model.Client;
-import com.letscode.commentNoteSystem.model.Movie;
 import com.letscode.commentNoteSystem.model.Point;
+import com.letscode.commentNoteSystem.model.Review;
 import com.letscode.commentNoteSystem.model.dto.ClientDTO;
-import com.letscode.commentNoteSystem.model.enums.MovieTypeEnum;
+import com.letscode.commentNoteSystem.model.enums.ReviewTypeEnum;
 import com.letscode.commentNoteSystem.repository.ClientRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -43,20 +43,17 @@ public class ClientService {
         clientRepository.save(client);
     }
 
-    public void addMovie(Long userId, Movie movie, MovieTypeEnum movieTypeEnum) {
+    public void likeOrDislikeReview(Long userId, Review review, ReviewTypeEnum reviewTypeEnum) {
         Client client = this.getById(userId);
 
-        client.getDislikeMovies().remove(movie);
-        client.getLikedMovies().remove(movie);
+        client.getDislikeReviews().remove(review);
+        client.getLikeReview().remove(review);
 
-        if (movieTypeEnum.equals(MovieTypeEnum.LIKE))
-            client.getLikedMovies().add(movie);
+        if (reviewTypeEnum.equals(ReviewTypeEnum.LIKE))
+            client.getLikeReview().add(review);
         else
-            client.getDislikeMovies().add(movie);
+            client.getDislikeReviews().add(review);
 
         this.clientRepository.save(client);
     }
-
-
-
 }
