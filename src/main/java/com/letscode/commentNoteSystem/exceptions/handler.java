@@ -68,8 +68,8 @@ public class handler extends ResponseEntityExceptionHandler {
 
     private static class Error {
 
-        private String userMessage;
-        private String developerMessage;
+        private final String userMessage;
+        private final String developerMessage;
 
         public Error(String userMessage, String developerMessage) {
 

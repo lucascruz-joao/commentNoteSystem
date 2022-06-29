@@ -28,7 +28,7 @@ public class ClientResource {
     }
 
     @PatchMapping("{userId}/{reviewId}/{type}")
-    public ResponseEntity<?> addMovie(@PathVariable("userId") Long userId, @PathVariable("reviewId") Long reviewId,
+    public ResponseEntity<?> addReview(@PathVariable("userId") Long userId, @PathVariable("reviewId") Long reviewId,
                                       @PathVariable("type") ReviewTypeEnum reviewTypeEnum) {
         Review review = reviewService.getById(reviewId);
         this.clientService.likeOrDislikeReview(userId, review, reviewTypeEnum);

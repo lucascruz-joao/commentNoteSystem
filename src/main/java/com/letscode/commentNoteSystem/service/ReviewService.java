@@ -4,6 +4,7 @@ package com.letscode.commentNoteSystem.service;
 import com.letscode.commentNoteSystem.model.Client;
 import com.letscode.commentNoteSystem.model.Movie;
 import com.letscode.commentNoteSystem.model.Review;
+import com.letscode.commentNoteSystem.model.dto.ReviewCitedDTO;
 import com.letscode.commentNoteSystem.model.dto.ReviewDTO;
 import com.letscode.commentNoteSystem.model.enums.OriginPointEnum;
 import com.letscode.commentNoteSystem.repository.ReviewRepository;
@@ -42,6 +43,22 @@ public class ReviewService {
         pointService.addPointToUser(client, 1L, OriginPointEnum.REPLY_REVIEW);
     }
 
+    public void addReviewByMovieId(Long movieId, Long userId, ReviewCitedDTO reviewCitedDTO) {
+        Client client = clientService.getById(userId);
+        Review citedReview = null;
+        if (reviewCitedDTO.getCitedReviewId() != null)
+            citedReview = reviewRepository.findById(reviewCitedDTO.getCitedReviewId()).orElse(null);
+
+        Review review = Review.builder()
+            .client(client)
+            .comment(reviewCitedDTO.getComment())
+            .repeated(false)
+            .delete(false)
+            .citedReview(citedReview)
+            .build();
+
+        movieService.addReview(movieId, review);
+    }
     public void deleteReviewId(Long movieId, Long reviewId) {
         Movie movie = movieService.getMovieById(movieId);
         Optional<Review> review = movie.getReviews().stream().filter(reviewItem -> reviewItem.getId().equals(reviewId)).findFirst();

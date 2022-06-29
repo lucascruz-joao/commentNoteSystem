@@ -23,7 +23,7 @@ public class MovieService {
     private final MovieRepository movieRepository;
     private final ModelMapper modelMapper;
     private final PointService pointService;
-    private final ClientService clientService;
+    //private final ClientService clientService;
 
     public List<MovieDTO> getAll() {
         List<Movie> all = this.movieRepository.findAll();
@@ -32,7 +32,7 @@ public class MovieService {
 
     public Movie getMovieById(Long movieId) {
         Optional<Movie> movieDb = this.movieRepository.findById(movieId);
-        if(movieDb.isPresent())
+        if (movieDb.isPresent())
             return movieDb.get();
         throw new RuntimeException("Filme não encontrado");
     }
@@ -42,6 +42,12 @@ public class MovieService {
         movie.getRates().add(rate);
         this.movieRepository.save(movie);
         pointService.addPointToUser(rate.getClient(), 1L, OriginPointEnum.RATE);
+    }
+
+    public void addReview(Long movieId, Review review) {
+        Movie movie = this.getMovieById(movieId);
+        movie.getReviews().add(review);
+        this.movieRepository.save(movie);
     }
 
     public Rate checkRateOnMovieByClient(Long movieId, Long clientId) {
@@ -54,20 +60,5 @@ public class MovieService {
     public List<ReviewDTO> getAllReviewsByMovieId(Long movieId) {
         List<Review> reviews = this.getMovieById(movieId).getReviews();
         return Arrays.stream(modelMapper.map(reviews, ReviewDTO[].class)).collect(Collectors.toList());
-    }
-
-    public void addReviewByMovieId(Long movieId, Long userId, ReviewDTO reviewDTO) {
-        Movie movie = this.getMovieById(movieId);
-        Client client = clientService.getById(userId);
-        Review review = Review.builder()
-                .client(client)
-                .comment(reviewDTO.getComment())
-                .repeated(false)
-                .delete(false)
-                .build();
-
-        movie.getReviews().add(review);
-        this.movieRepository.save(movie);
-
     }
 }

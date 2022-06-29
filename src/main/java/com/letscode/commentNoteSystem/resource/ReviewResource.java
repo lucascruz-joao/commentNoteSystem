@@ -1,7 +1,6 @@
 package com.letscode.commentNoteSystem.resource;
 
-import com.letscode.commentNoteSystem.model.dto.ReviewDTO;
-import com.letscode.commentNoteSystem.service.MovieService;
+import com.letscode.commentNoteSystem.model.dto.ReviewCitedDTO;
 import com.letscode.commentNoteSystem.service.ReviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,22 +14,20 @@ import javax.validation.Valid;
 @AllArgsConstructor
 public class ReviewResource {
 
-    private final MovieService movieService;
-
     private final ReviewService reviewService;
 
     @PostMapping("{movieId}/{userId}")
     public ResponseEntity<?> createReviewFromMovie(@PathVariable("movieId") Long movieId, @PathVariable("userId") Long userId,
-                                                   @Valid @RequestBody ReviewDTO reviewDTO) {
-        movieService.addReviewByMovieId(movieId, userId, reviewDTO);
+                                                   @Valid @RequestBody ReviewCitedDTO reviewCitedDTO) {
+        reviewService.addReviewByMovieId(movieId, userId, reviewCitedDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("{userId}/{reviewId}/reply")
     public ResponseEntity<?> createReply(@PathVariable("userId") Long userId,
                                          @PathVariable("reviewId") Long reviewId,
-                                         @Valid @RequestBody ReviewDTO reviewDTO) {
-        reviewService.addReplyOnReview(reviewId, userId, reviewDTO);
+                                         @Valid @RequestBody ReviewCitedDTO reviewCitedDTO) {
+        reviewService.addReplyOnReview(reviewId, userId, reviewCitedDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotNull @NotBlank
     @Column(columnDefinition = "TEXT")
     private String comment;
 
@@ -31,4 +32,7 @@ public class Review {
     private Boolean repeated = false;
 
     private Boolean delete = false;
+
+    @ManyToOne
+    private Review citedReview;
 }
