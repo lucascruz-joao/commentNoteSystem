@@ -1,5 +1,6 @@
 package com.letscode.commentNoteSystem.model;
 
+import com.letscode.commentNoteSystem.model.enums.ClientTypeEnum;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,16 +20,18 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+    @com.sun.istack.NotNull
     @CreationTimestamp
     private Date created_at;
-    @NotNull
+    @com.sun.istack.NotNull
     @Column(unique = true)
     private String email;
-    @NotNull
+    @com.sun.istack.NotNull
     private String name;
     @NotNull
     private String password;
+    @Enumerated(EnumType.STRING)
+    private ClientTypeEnum type;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Point> points;
     @ManyToMany(cascade = CascadeType.ALL)
