@@ -4,6 +4,7 @@ import com.letscode.commentNoteSystem.model.Client;
 import com.letscode.commentNoteSystem.model.Point;
 import com.letscode.commentNoteSystem.model.Review;
 import com.letscode.commentNoteSystem.model.dto.ClientDTO;
+import com.letscode.commentNoteSystem.model.enums.ClientTypeEnum;
 import com.letscode.commentNoteSystem.model.enums.ReviewTypeEnum;
 import com.letscode.commentNoteSystem.repository.ClientRepository;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,7 @@ public class ClientService {
     public void createClientFromDTO(ClientDTO clientDTO) {
         Client client = this.modelMapper.map(clientDTO, Client.class);
         client.setPassword(bCryptPasswordEncoder.encode(client.getPassword()));
+        client.setType(ClientTypeEnum.LEITOR);
         this.clientRepository.save(client);
     }
 
@@ -54,6 +56,12 @@ public class ClientService {
         else
             client.getDislikeReviews().add(review);
 
+        this.clientRepository.save(client);
+    }
+
+    public void changeClientRole(Long userId, ClientTypeEnum clientTypeEnum){
+        Client client = this.getById(userId);
+        client.setType(clientTypeEnum);
         this.clientRepository.save(client);
     }
 }

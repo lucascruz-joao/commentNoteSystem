@@ -47,7 +47,7 @@ public class ReviewService {
         Client client = clientService.getById(userId);
         Review citedReview = null;
         if (reviewCitedDTO.getCitedReviewId() != null)
-            citedReview = reviewRepository.findById(reviewCitedDTO.getCitedReviewId()).orElse(null);
+            citedReview = this.getById(reviewCitedDTO.getCitedReviewId());
 
         Review review = Review.builder()
             .client(client)
@@ -79,5 +79,11 @@ public class ReviewService {
         }
         else
             throw new RuntimeException("Resposta não encontrada");
+    }
+
+    public void setReviewRepeated(Long reviewId){
+        Review review = this.getById(reviewId);
+        review.setRepeated(true);
+        this.reviewRepository.save(review);
     }
 }

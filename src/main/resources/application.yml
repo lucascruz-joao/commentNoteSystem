@@ -1,4 +1,10 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8082
+          #jwk-set-uri: http://localhost:8082/oauth2/jwks
   jpa:
     database: POSTGRESQL
     show-sql: false
@@ -14,8 +20,11 @@ spring:
       platform: postgres
   flyway:
     enabled: false
+
+
+
 server:
-  port: 8082
+  port: 8080
 omdb:
   base-url: "https://www.omdbapi.com/?apikey={key}&t={title}"
   apikey: "2b28c78a"

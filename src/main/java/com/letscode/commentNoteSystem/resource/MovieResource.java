@@ -6,6 +6,7 @@ import com.letscode.commentNoteSystem.service.MovieService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ public class MovieResource {
     private final MovieService movieService;
 
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_LEITOR') or hasRole('ROLE_BASICO') or hasRole('ROLE_AVANCADO') or hasRole('ROLE_MODERADOR')")
     public ResponseEntity<List<MovieDTO>> getAll() {
         List<MovieDTO> all = movieService.getAll();
         if(all.size() != 0)
@@ -29,6 +31,7 @@ public class MovieResource {
     }
 
     @GetMapping("reviews/{movieId}")
+    @PreAuthorize("hasRole('ROLE_LEITOR') or hasRole('ROLE_BASICO') or hasRole('ROLE_AVANCADO') or hasRole('ROLE_MODERADOR')")
     public ResponseEntity<?> getAllReviewsByMovieId(@PathVariable("movieId") Long movieId) {
         List<ReviewDTO> allReviews = movieService.getAllReviewsByMovieId(movieId);
         return new ResponseEntity<>(allReviews, HttpStatus.OK);
