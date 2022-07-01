@@ -23,7 +23,6 @@ public class MovieService {
     private final MovieRepository movieRepository;
     private final ModelMapper modelMapper;
     private final PointService pointService;
-    //private final ClientService clientService;
 
     public List<MovieDTO> getAll() {
         List<Movie> all = this.movieRepository.findAll();

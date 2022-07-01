@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -18,14 +20,15 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    private String name;
+    @CreationTimestamp
+    private Date created_at;
     @NotNull
     @Column(unique = true)
     private String email;
     @NotNull
+    private String name;
+    @NotNull
     private String password;
-    @ManyToOne
-    private Profile profile;
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Point> points;
     @ManyToMany(cascade = CascadeType.ALL)

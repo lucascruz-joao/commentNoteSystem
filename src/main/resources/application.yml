@@ -14,3 +14,8 @@ spring:
       platform: postgres
   flyway:
     enabled: false
+server:
+  port: 8082
+omdb:
+  base-url: "https://www.omdbapi.com/?apikey={key}&t={title}"
+  apikey: "2b28c78a"
