@@ -1,5 +1,7 @@
 package com.letscode.commentNoteSystem.config;
 
+import com.letscode.commentNoteSystem.model.Movie;
+import com.letscode.commentNoteSystem.model.dto.OmdbDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +16,14 @@ public class BeansUtils {
 
     @Bean
     public ModelMapper modelMapper() {
-        return new ModelMapper();
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.createTypeMap(OmdbDTO.class, Movie.class).addMappings(
+                mapper -> {
+                    mapper.map(OmdbDTO::getYear, Movie::setYear);
+                    mapper.map(OmdbDTO::getTitle, Movie::setTitle);
+                    mapper.map(OmdbDTO::getId, Movie::setId);
+                }
+        );
+        return modelMapper;
     }
 }

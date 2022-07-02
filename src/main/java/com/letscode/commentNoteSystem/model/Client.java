@@ -1,10 +1,7 @@
 package com.letscode.commentNoteSystem.model;
 
 import com.letscode.commentNoteSystem.model.enums.ClientTypeEnum;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -13,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Data
+@Getter @Setter
 @Builder
 @AllArgsConstructor @NoArgsConstructor
 public class Client {

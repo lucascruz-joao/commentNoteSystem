@@ -1,13 +1,12 @@
 package com.letscode.commentNoteSystem.model.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor @NoArgsConstructor
 public class RateDTO {
     private Long userId;

@@ -1,0 +1,305 @@
+{
+	"info": {
+		"_postman_id": "8428221d-025e-47e2-b397-9571d4797f76",
+		"name": "Note System API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Client",
+			"item": [
+				{
+					"name": "createClient",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"lucas\",\r\n    \"email\": \"lucas@teste\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/clients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "likeOrDislikeReview",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/clients/1/1/LIKE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"clients",
+								"1",
+								"1",
+								"LIKE"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movie",
+			"item": [
+				{
+					"name": "getAllReviewsByMovieId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/reviews/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								"reviews",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMovieById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ4NXQjUzI1NiI6Inl6Qjh2ZkFlSHRpdHlYUHBZMG9yYlFUODVDUGdPMkc0SlhlYXpzd1lZc0kiLCJraWQiOiJub3Rlc3lzdGVtIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJyZXNvdXJjZXNlcnZlciIsImF1ZCI6InJlc291cmNlc2VydmVyIiwibmJmIjoxNjU2NzExOTk2LCJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODA4MiIsImV4cCI6MTY1NjcxNTU5NiwiaWF0IjoxNjU2NzExOTk2fQ.PDT7LRKzWrhPZm0oFSFiuKFUaf69R3PQyB4oxk77FsvpcLrc6AlGHSrIo_RgaFO8qUgA_awSbsxnEw7GI-gBYej6xErUHUeXxvPh4WT77_Q3PlabCwVjNMUt06bnvUCoN3BnQFJWll06vgTU1yM150v_LpLFVG4QffGON4RbmdxSrX-mU6R6mfv10jQExjn2UnskIpnVOmr8wRB2iBamtWlAB9AiyWvszYI2qdBrue0x9y_gDKv49XS15ruSqFq2-jNbkcgY_aKANiwbZ57l4StXHFDDdkNUUqOT9d0OMrSn5fRggB6afKwdWDWnA7HStXNqkdPdRg8naiFUOYyMNA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/movies/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createReviewFromMovie",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ4NXQjUzI1NiI6Inl6Qjh2ZkFlSHRpdHlYUHBZMG9yYlFUODVDUGdPMkc0SlhlYXpzd1lZc0kiLCJraWQiOiJub3Rlc3lzdGVtIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJsdWNhc0B0ZXN0ZSIsImF1ZCI6InJlc291cmNlc2VydmVyIiwibmJmIjoxNjU2NzE5MjE1LCJ1c2VyX2lkIjoiMSIsInNjb3BlIjpbImVtYWlsIl0sImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDgyIiwidXNlcl9mdWxsbmFtZSI6Imx1Y2FzIiwiZXhwIjoxNjU2NzIyODE1LCJpYXQiOjE2NTY3MTkyMTUsImF1dGhvcml0aWVzIjpbIlJPTEVfTU9ERVJBRE9SIl19.a7BQIfCJKjxgoRUCqP-bDAQ0VmeZawZLGSr_0TSPnvgSsQs8Sv20gKwhO1c-uMvmqfzCxvD1LqDXk1kBm9VplKM58gvySyYjKiYdtM66TJQp-zYmqwClrql6Ll3OMEAWgcGQLcQF9e9IW9Zxk134fN1Tvm0Za6o4eHj3fJFK1JVqG21wptWrN6nGjgTwW9-jqSxEt04ATthETXiSeF5Q824q1MXppmbFZUki6v5pr8p7fM41-wFR--R2zsQxmxHn0JLg3VQclUfX1ZH3-3HKaHj-Bx4FBj4y6Y85ceGsTu_wnRvPWkGjZTus0ppf9-YRRF3tH2RWtN7aWUiwPaQ4Nw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    //\"citedReviewId\": 5,\r\n    \"comment\": \"testando 2 comentario\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/reviews/tt0371746/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reviews",
+								"tt0371746",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createReply",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ4NXQjUzI1NiI6Inl6Qjh2ZkFlSHRpdHlYUHBZMG9yYlFUODVDUGdPMkc0SlhlYXpzd1lZc0kiLCJraWQiOiJub3Rlc3lzdGVtIiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJsdWNhc2NydXouam9hb0BhbHUudWZjLmJyIiwiYXVkIjoiYXdibG9nIiwibmJmIjoxNjU2NjgzMzE1LCJ1c2VyX2lkIjoiMSIsInNjb3BlIjpbIm15dXNlcjpyZWFkIiwicG9zdHM6d3JpdGUiLCJteXVzZXI6d3JpdGUiXSwiaXNzIjoiaHR0cDpcL1wvbG9jYWxob3N0OjgwODIiLCJ1c2VyX2Z1bGxuYW1lIjoibHVjYXMgY3J1eiIsImV4cCI6MTY1NjY4NDIxNSwiaWF0IjoxNjU2NjgzMzE1LCJhdXRob3JpdGllcyI6WyJST0xFX0xFSVRPUiJdfQ.I6xs48epwqxW_EhAT6gGQ9HK54C7mjQUkBziR_9sQ4LudFbdsqvsA8P_cun1FIrCWh9D_91ijcdVdj5sJvfw7q0UIr7dll3X2_hT26ZDmxREjaZR5UCJqahuCBVhJMGA-YFPkvA4MfNqG_oYoJwzllh7IRPVbfUpUAYGiao7gPfMD2E86hohkm2JD4HZUOoYpn5cuDN7DNmqHMATt-Gt5Av58Gjb69qEG6oMTW6wNAFKgx48m24FeeSAWHekIDGUBKPPkhm3vihRcYAkDt46AqjORM3wnXpu7lzkL3D1MTz_34uoSelHJsgnGRw_gkx6xXDViE9V1U4RioNqLnEDXQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"citedReviewId\": 1,\r\n    \"comment\": \"testando outra resposta com citação\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/reviews/1/1/reply",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reviews",
+								"1",
+								"1",
+								"reply"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Review",
+			"item": [
+				{
+					"name": "createReply",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"comment\": \"comentando 1 comentario dentro de 1 comentario\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/reviews/1/1/reply",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reviews",
+								"1",
+								"1",
+								"reply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteReply",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/reviews/1/3/reply",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reviews",
+								"1",
+								"3",
+								"reply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteReview",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/reviews/1/13/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reviews",
+								"1",
+								"13",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Consultar omdb",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/omdb/paz",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"omdb",
+						"paz"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

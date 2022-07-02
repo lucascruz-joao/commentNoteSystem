@@ -1,5 +1,6 @@
 package com.letscode.commentNoteSystem.resource;
 
+import com.letscode.commentNoteSystem.model.Movie;
 import com.letscode.commentNoteSystem.model.dto.MovieDTO;
 import com.letscode.commentNoteSystem.model.dto.ReviewDTO;
 import com.letscode.commentNoteSystem.service.MovieService;
@@ -30,9 +31,16 @@ public class MovieResource {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("{movieId}")
+    @PreAuthorize("hasRole('ROLE_LEITOR') or hasRole('ROLE_BASICO') or hasRole('ROLE_AVANCADO') or hasRole('ROLE_MODERADOR')")
+    public ResponseEntity<?> getMovieById(@PathVariable("movieId") String movieId) {
+        Movie allMovies = movieService.getMovieById(movieId);
+        return new ResponseEntity<>(allMovies, HttpStatus.OK);
+    }
+
     @GetMapping("reviews/{movieId}")
     @PreAuthorize("hasRole('ROLE_LEITOR') or hasRole('ROLE_BASICO') or hasRole('ROLE_AVANCADO') or hasRole('ROLE_MODERADOR')")
-    public ResponseEntity<?> getAllReviewsByMovieId(@PathVariable("movieId") Long movieId) {
+    public ResponseEntity<?> getAllReviewsByMovieId(@PathVariable("movieId") String movieId) {
         List<ReviewDTO> allReviews = movieService.getAllReviewsByMovieId(movieId);
         return new ResponseEntity<>(allReviews, HttpStatus.OK);
     }

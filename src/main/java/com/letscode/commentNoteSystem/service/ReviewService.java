@@ -29,7 +29,7 @@ public class ReviewService {
         throw new RuntimeException("Comentário não encontrado");
     }
 
-    public void addReplyOnReview(Long reviewId, Long userId, ReviewDTO reviewDTO) {
+    public void addReplyOnReview(Long reviewId, Long userId, ReviewCitedDTO reviewDTO) {
         Review review = this.getById(reviewId);
         Client client = clientService.getById(userId);
         Review reply = Review.builder()
@@ -43,7 +43,7 @@ public class ReviewService {
         pointService.addPointToUser(client, 1L, OriginPointEnum.REPLY_REVIEW);
     }
 
-    public void addReviewByMovieId(Long movieId, Long userId, ReviewCitedDTO reviewCitedDTO) {
+    public void addReviewByMovieId(String movieId, Long userId, ReviewCitedDTO reviewCitedDTO) {
         Client client = clientService.getById(userId);
         Review citedReview = null;
         if (reviewCitedDTO.getCitedReviewId() != null)
@@ -59,7 +59,7 @@ public class ReviewService {
 
         movieService.addReview(movieId, review);
     }
-    public void deleteReviewId(Long movieId, Long reviewId) {
+    public void deleteReviewId(String movieId, Long reviewId) {
         Movie movie = movieService.getMovieById(movieId);
         Optional<Review> review = movie.getReviews().stream().filter(reviewItem -> reviewItem.getId().equals(reviewId)).findFirst();
         if(review.isPresent()) {

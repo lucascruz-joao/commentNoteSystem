@@ -21,10 +21,8 @@ spring:
   flyway:
     enabled: false
 
-
-
 server:
   port: 8080
 omdb:
-  base-url: "https://www.omdbapi.com/?apikey={key}&t={title}"
+  base-url: "https://www.omdbapi.com"
   apikey: "2b28c78a"

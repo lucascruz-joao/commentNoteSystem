@@ -19,7 +19,7 @@ public class ReviewResource {
 
     @PostMapping("{movieId}/{userId}")
     @PreAuthorize("hasRole('ROLE_BASICO') or hasRole('ROLE_AVANCADO') or hasRole('ROLE_MODERADOR')")
-    public ResponseEntity<?> createReviewFromMovie(@PathVariable("movieId") Long movieId, @PathVariable("userId") Long userId,
+    public ResponseEntity<?> createReviewFromMovie(@PathVariable("movieId") String movieId, @PathVariable("userId") Long userId,
                                                    @Valid @RequestBody ReviewCitedDTO reviewCitedDTO) {
         reviewService.addReviewByMovieId(movieId, userId, reviewCitedDTO);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -36,7 +36,7 @@ public class ReviewResource {
 
     @DeleteMapping("{movieId}/{reviewId}")
     @PreAuthorize("hasRole('ROLE_MODERADOR')")
-    public ResponseEntity<Void> deleteReview(@PathVariable("movieId") Long movieId,
+    public ResponseEntity<Void> deleteReview(@PathVariable("movieId") String movieId,
                                              @PathVariable("reviewId") Long reviewId) {
         reviewService.deleteReviewId(movieId, reviewId);
         return new ResponseEntity<>(HttpStatus.OK);

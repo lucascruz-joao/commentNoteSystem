@@ -20,7 +20,7 @@ import java.util.List;
 
 @ControllerAdvice
 @AllArgsConstructor
-public class handler extends ResponseEntityExceptionHandler {
+public class ExceptionControllerHandler extends ResponseEntityExceptionHandler {
 
     private final MessageSource messageSource;
 

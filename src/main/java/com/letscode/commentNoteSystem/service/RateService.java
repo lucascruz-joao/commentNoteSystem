@@ -14,7 +14,7 @@ public class RateService {
 
     private final ClientService clientService;
 
-    public void saveRate(Long movieId, RateDTO rateDTO) {
+    public void saveRate(String movieId, RateDTO rateDTO) {
         Rate rate = null;
         rate = this.movieService.checkRateOnMovieByClient(movieId, rateDTO.getUserId());
         if (rate != null) {
